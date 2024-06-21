@@ -17,7 +17,7 @@ function App() {
     formData.append('imagen', file);
 
     // Utilizar la variable de entorno para la URL de la API
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+    const apiUrl = process.env.REACT_APP_API_URL;
     axios.post(`${apiUrl}/api/subir-imagen`, formData)
       .then(response => {
         console.log('Imagen cargada con éxito', response);
