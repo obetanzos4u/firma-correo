@@ -4,8 +4,12 @@ const cors = require('cors');
 const app = express();
 const path = require('path');
 
-// Habilitar CORS para todas las solicitudes
-app.use(cors());
+const corsOptions = {
+  origin: 'https://firmas-de-correo.pages.dev', // Reemplaza con el dominio de tu aplicación frontend
+  optionsSuccessStatus: 200 // Algunos navegadores antiguos (IE11, varios SmartTVs) se bloquean con 204
+};
+
+app.use(cors(corsOptions));
 
 // Servir archivos estáticos desde la carpeta 'public/imgs'
 app.use('/imgs', express.static(path.join(__dirname, 'public', 'imgs')));
