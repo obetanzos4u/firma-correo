@@ -10,13 +10,15 @@ function App() {
     setFile(e.target.files[0]);
   }
 
-  const handleFormSubmit = (e) => {
+  function handleFormSubmit(e) {
     e.preventDefault();
     setUploading(true); // Iniciar el indicador de carga
     const formData = new FormData();
     formData.append('imagen', file);
 
-    axios.post('http://localhost:3000/api/subir-imagen', formData)
+    // Utilizar la variable de entorno para la URL de la API
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+    axios.post(`${apiUrl}/api/subir-imagen`, formData)
       .then(response => {
         console.log('Imagen cargada con éxito', response);
         setUploading(false); // Detener el indicador de carga
@@ -27,7 +29,7 @@ function App() {
         setUploading(false); // Detener el indicador de carga
         // Aquí podrías actualizar el estado para mostrar un mensaje de error al usuario
       });
-  };
+  }
 
   return (
     <div className="App">

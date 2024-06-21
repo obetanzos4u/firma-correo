@@ -16,14 +16,24 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Ruta POST para manejar la carga de imágenes
+// router.post('/subir-imagen', upload.single('imagen'), (req, res) => {
+//   console.log('Solicitud recibida en /subir-imagen');
+//   if (req.file) {
+//     console.log('Archivo cargado:', req.file);
+//   } else {
+//     console.log('No se cargó ningún archivo.');
+//   }
+//   res.status(200).send('Imagen cargada con éxito');
+// });
+
 router.post('/subir-imagen', upload.single('imagen'), (req, res) => {
-  console.log('Solicitud recibida en /subir-imagen');
   if (req.file) {
-    console.log('Archivo cargado:', req.file);
+    // Procesar el archivo cargado si existe
+    res.status(200).send('Imagen cargada con éxito');
   } else {
-    console.log('No se cargó ningún archivo.');
+    // Manejar el caso en que no se cargó ningún archivo
+    res.status(400).send('No se recibió ningún archivo.');
   }
-  res.status(200).send('Imagen cargada con éxito');
 });
 
 module.exports = router;
